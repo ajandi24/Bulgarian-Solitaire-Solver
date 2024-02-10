@@ -6,25 +6,109 @@ abstract class BulgarianSolitaire {
 
     // protected static BulgarianSolitaire instance;
     protected ArrayList<Integer> currentStacks;
-    protected ArrayList<String> history;
+    protected ArrayList<ArrayList<Integer>> history = new ArrayList<ArrayList<Integer>>();
 
-    //******************************************************************************
+    protected int cycleCount; // The number of cycles until a repeat is found
+    protected int repeatedCycles; // The original repeated cycle (not the second one)
+
+    // ******************************************************************************
     // Constructor
 
     protected BulgarianSolitaire() {
     };
 
-    //******************************************************************************
+    // ******************************************************************************
     // Abstract methods
 
     // abstract BulgarianSolitaire getInstance();
+    /***
+     * Advances to the next iteration of the game.
+     * Updates currentStacks.
+     */
     abstract void advanceStep();
 
-    //******************************************************************************
+    // ******************************************************************************
     // Getters and setters and more
 
     /***
-     * Sorts the stack into non-increasing order
+     * Starts the loop and runs until finished or timing out.
+     * 
+     * @param attempts number of attempts before timing out.
+     * @return number of cycles, -1 if timing out.
+     */
+    public int beginLoop(int attempts) {
+
+        // Need to add the initial condition to history
+        addHistory();
+
+        for (int i = 0; i < attempts; i++) {
+            advanceStep();
+            addHistory();
+
+            // Print the current stack
+            // System.out.println("Current stacks: " + this.toString());
+
+            // If history has been repeated, end the loop
+            if (checkHistory()) {
+                cycleCount = i + 1;
+                return 0;
+            }
+        }
+        return -1;
+    }
+
+    /***
+     * Checks backwards to the beginning to see if the current stacks have happened
+     * before. Also adds the first repeated cycle to repeatedCycles
+     * 
+     * @return true if repeated, false if not.
+     */
+    public boolean checkHistory() {
+
+        for (int i = history.size() - 2; i >= 0; i--) {
+            if (history.get(i).equals(currentStacks)) {
+                repeatedCycles = i;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /***
+     * Needed because otherwise it is the object not the values being added or
+     * something
+     */
+    public void addHistory() {
+        ArrayList<Integer> newHistory = new ArrayList<>();
+
+        for (int i = 0; i < currentStacks.size(); i++) {
+            newHistory.add(currentStacks.get(i));
+        }
+
+        history.add(newHistory);
+    }
+
+    /***
+     * Prints the history, may return String in the future
+     * Need to actually implement
+     */
+    public void printHistory() {
+        for (int i = 0; i < history.size(); i++) {
+            System.out.println(i + ": " + history.get(i));
+        }
+    }
+
+    public int getCycleCount() {
+        return cycleCount;
+    }
+
+    public int getRepeatedCycles() {
+        return repeatedCycles;
+    }
+
+    /***
+     * Sorts the stack into non-increasing order.
      */
     public void sortCurrentStacks() {
         currentStacks.sort(null);
@@ -39,6 +123,9 @@ abstract class BulgarianSolitaire {
         return currentStacks;
     }
 
+    /***
+     * Returns the current stacks.
+     */
     public String toString() {
         // If currentStacks is empty stuff breaks
         if (currentStacks.size() == 0) {
