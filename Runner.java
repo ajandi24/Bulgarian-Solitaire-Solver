@@ -17,7 +17,7 @@ class Runner {
         int cycleCount = bulgarianSolitaire.getCycleCount();
         int originalCycle = bulgarianSolitaire.getRepeatedCycles();
 
-        String output = cycleCount != -1 ? "Repeated cycle " + originalCycle + " after " + cycleCount + " cycles." : "Timed out after " + attempts + " attempts.";
+        String output = cycleCount != -1 ? "Repeated cycle " + originalCycle + " after " + cycleCount + " cycles. (Loop of length " + (cycleCount - originalCycle) + " cycles.)" : "Timed out after " + attempts + " attempts.";
         bulgarianSolitaire.printHistory();
         System.out.println(output);
     }
@@ -42,11 +42,15 @@ class Runner {
 
         int length = (int) (Math.random() * 10 + 3);
         int randomValue;
+        int sum = 0;
 
         for (int i = 0; i < length; i++) {
             randomValue = (int) (Math.random() * 15 + 1);
             testConditions.add(randomValue);
+            sum += randomValue;
         }
+
+        System.out.println("Sum of random: " + sum);
 
         return testConditions;
     }
