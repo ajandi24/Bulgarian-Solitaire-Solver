@@ -10,15 +10,22 @@ class Runner {
         initialCondition = randomTestConditions();
         int attempts = 10000;
 
+        // Inserts the initial condition
         bulgarianSolitaire.createInitialCondition(initialCondition);
         bulgarianSolitaire.sortCurrentStacks();
 
+        // Begin and simulate the game and retrieve how long it took
         bulgarianSolitaire.beginLoop(attempts);
         int cycleCount = bulgarianSolitaire.getCycleCount();
         int originalCycle = bulgarianSolitaire.getRepeatedCycles();
 
-        String output = cycleCount != -1 ? "Repeated cycle " + originalCycle + " after " + cycleCount + " cycles. (Loop of length " + (cycleCount - originalCycle) + " cycles.)" : "Timed out after " + attempts + " attempts.";
+        // Creating the output strings
+        String success = "Repeated cycle " + originalCycle + " after " + cycleCount + " cycles. (Loop of length " + (cycleCount - originalCycle) + " cycles.)";
+        String failure = "Timed out after " + attempts + " attempts.";
+
+        // Outputting the strings
         bulgarianSolitaire.printHistory();
+        String output = cycleCount != -1 ? success : failure;
         System.out.println(output);
     }
 
