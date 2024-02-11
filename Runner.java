@@ -8,7 +8,7 @@ class Runner {
 
         // initialCondition = testConditions();
         initialCondition = randomTestConditions();
-        int attempts = 1000;
+        int attempts = 10000;
 
         bulgarianSolitaire.createInitialCondition(initialCondition);
         bulgarianSolitaire.sortCurrentStacks();
@@ -28,7 +28,7 @@ class Runner {
     private static ArrayList<Integer> testConditions() {
         ArrayList<Integer> testConditions = new ArrayList<Integer>();
 
-        testConditions.add(5);
+        testConditions.add(86);
         //testConditions.add(0);
 
         return testConditions;

@@ -54,6 +54,7 @@ abstract class BulgarianSolitaire {
                 return 0;
             }
         }
+        cycleCount = -1;
         return -1;
     }
 
