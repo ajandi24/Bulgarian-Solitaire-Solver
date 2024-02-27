@@ -10,6 +10,10 @@ class Runner {
         initialCondition = randomTestConditions();
         int attempts = 10000;
 
+        printInDetail(initialCondition);
+    }
+
+    private static void printInDetail(ArrayList<Integer> initialCondition) {
         // Inserts the initial condition
         bulgarianSolitaire.createInitialCondition(initialCondition);
         bulgarianSolitaire.sortCurrentStacks();
