@@ -38,6 +38,9 @@ abstract class BulgarianSolitaire {
      */
     public int beginLoop(int attempts) {
 
+        // Clearing history
+        history = new ArrayList<ArrayList<Integer>>();
+        
         // Need to add the initial condition to history
         addHistory();
 
@@ -98,6 +101,23 @@ abstract class BulgarianSolitaire {
         for (int i = 0; i < history.size(); i++) {
             System.out.println(i + ": " + history.get(i));
         }
+    }
+
+    /***
+     * Returns the string of the final stacks of the game.
+     * @return String of stacks to be printed
+     */
+    public String getFinalStacks() {
+        String historyString = "";
+
+        // Concatenates history to a string
+        ArrayList<Integer> finalStacks = history.get(history.size() - 1);
+        for (int i = 0; i < finalStacks.size(); i++ ){
+            historyString += finalStacks.get(i) + " ";
+        }
+        historyString.substring(historyString.length() - 1);
+
+        return historyString;
     }
 
     public int getCycleCount() {
