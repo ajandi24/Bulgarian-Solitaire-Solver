@@ -20,9 +20,15 @@ class Runner {
     private static void printPatterns(int maxSize) {
         ArrayList<Integer> initialCondition = new ArrayList<>();
 
-        for (int i = 1; i <= maxSize; i++) {
+        for (int i = 7; i <= maxSize; i++) {
             initialCondition = new ArrayList<>();
+            
+            // Stack of size n
             initialCondition.add(i);
+
+            // Stack of size 1
+            //initialCondition.add(1);
+
             printSimply(initialCondition, i);
         }
     }
