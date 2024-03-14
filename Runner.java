@@ -10,7 +10,8 @@ class Runner {
         bulgarianSolitaire = new StandardBulgarianSolitaire();
         attempts = 100000;
 
-        printPatterns(100);
+        //printInDetail();
+        printPatterns(20);
         //printInDetail();
     }
 
@@ -20,16 +21,25 @@ class Runner {
     private static void printPatterns(int maxSize) {
         ArrayList<Integer> initialCondition = new ArrayList<>();
 
-        for (int i = 7; i <= maxSize; i++) {
+        int manyStackSize = 2;
+
+        for (int i = 1; i <= maxSize; i++) {
             initialCondition = new ArrayList<>();
             
             // Stack of size n
-            initialCondition.add(i);
+            //initialCondition.add(i);
 
             // Stack of size 1
             //initialCondition.add(1);
 
-            printSimply(initialCondition, i);
+            // Add lots of stacks
+            initialCondition.add(manyStackSize);
+            for (int j = 1; j < i; j++) {
+                initialCondition.add(manyStackSize);
+            }
+            printSimply(initialCondition, i * manyStackSize);
+
+            //printSimply(initialCondition, i);
         }
     }
 
@@ -96,7 +106,9 @@ class Runner {
     private static ArrayList<Integer> testConditions() {
         ArrayList<Integer> testConditions = new ArrayList<Integer>();
 
-        testConditions.add(56);
+        for (int i = 0; i < 14; i++) {
+            testConditions.add(2);
+        }
         //testConditions.add(0);
 
         return testConditions;
