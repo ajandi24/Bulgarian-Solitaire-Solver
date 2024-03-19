@@ -21,25 +21,27 @@ class Runner {
     private static void printPatterns(int maxSize) {
         ArrayList<Integer> initialCondition = new ArrayList<>();
 
-        int manyStackSize = 2;
+        int manyStackSize = 1;
 
         for (int i = 1; i <= maxSize; i++) {
             initialCondition = new ArrayList<>();
             
             // Stack of size n
-            //initialCondition.add(i);
+            initialCondition.add(i);
 
             // Stack of size 1
             //initialCondition.add(1);
 
             // Add lots of stacks
+            /*
             initialCondition.add(manyStackSize);
             for (int j = 1; j < i; j++) {
                 initialCondition.add(manyStackSize);
             }
             printSimply(initialCondition, i * manyStackSize);
+            */
 
-            //printSimply(initialCondition, i);
+            printSimply(initialCondition, i);
         }
     }
 
@@ -62,9 +64,23 @@ class Runner {
         boolean indexEqualsCycleCount = index == cycleCount;
 
         // Add δ: DIFFERENCE if it takes fewer cycles than usual, an anomaly
-        printString += !indexEqualsCycleCount ? "δ: " + (index - cycleCount) : "";
+        // Print simply, deprecated
+        //printString += !indexEqualsCycleCount ? "δ: " + (index - cycleCount) : "";
+        //printString += "\tn: " + index + "\t u: " + cycleCount + "\t r: " + loopLength + "\t" + bulgarianSolitaire.getFinalStacks();
 
-        printString += "\tn: " + index + "\t c: " + cycleCount + "\t l: " + loopLength + "\t" + bulgarianSolitaire.getFinalStacks();
+
+        // Printing for LaTeX
+        // n
+        printString += index + " & ";
+        // u
+        printString += cycleCount + " & ";
+        // r
+        printString += loopLength + " & ";
+        // delta
+        printString += !indexEqualsCycleCount ? index - cycleCount : "";
+        printString += " & ";
+        // First Repeated State
+        printString += bulgarianSolitaire.getFinalStacks() + " \\\\";
 
         System.out.println(printString);
     }
