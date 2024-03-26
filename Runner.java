@@ -10,8 +10,8 @@ class Runner {
         bulgarianSolitaire = new StandardBulgarianSolitaire();
         attempts = 100000;
 
-        //printInDetail();
-        printPatterns(20);
+        printInDetail();
+        //printPatterns(100);
         //printInDetail();
     }
 
@@ -68,7 +68,19 @@ class Runner {
         //printString += !indexEqualsCycleCount ? "δ: " + (index - cycleCount) : "";
         //printString += "\tn: " + index + "\t u: " + cycleCount + "\t r: " + loopLength + "\t" + bulgarianSolitaire.getFinalStacks();
 
+        // Printing for spreadsheet
+        // n
+        //printString += index;
+        // u
+        //printString += cycleCount;
+        // r
+        //printString += loopLength;
+        // delta
+        //printString += !indexEqualsCycleCount ? index - cycleCount : "";
+        // First Repeated State
+        printString += bulgarianSolitaire.getFinalStacks();
 
+        /*
         // Printing for LaTeX
         // n
         printString += index + " & ";
@@ -81,6 +93,7 @@ class Runner {
         printString += " & ";
         // First Repeated State
         printString += bulgarianSolitaire.getFinalStacks() + " \\\\";
+        */
 
         System.out.println(printString);
     }
@@ -122,10 +135,12 @@ class Runner {
     private static ArrayList<Integer> testConditions() {
         ArrayList<Integer> testConditions = new ArrayList<Integer>();
 
+        /*
         for (int i = 0; i < 14; i++) {
             testConditions.add(2);
         }
-        //testConditions.add(0);
+        */
+        testConditions.add(10);
 
         return testConditions;
     }
